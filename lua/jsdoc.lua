@@ -128,7 +128,6 @@ M.insert_jsdoc = function()
 	local current_window = vim.api.nvim_get_current_win()
 	local start_row, _ = function_node:start()
 	vim.api.nvim_win_set_cursor(current_window, { start_row + 1, 0 })
-	vim.api.nvim_put({ " " }, "l", false, true)
 
 	---@type table<string, table<string, string>>
 	luasnip.snip_expand(luasnip.get_snippets(vim.bo.ft)[1])
