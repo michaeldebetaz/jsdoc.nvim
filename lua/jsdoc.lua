@@ -18,11 +18,11 @@ function M._get_node_text(node, bufnr)
 end
 
 ---@alias TSNodeType "formal_parameters"|"function_declaration"|"identifier"|"rest_pattern"
----
+
 ---@param node TSNode
 ---@param types TSNodeType[]
 ---@return TSNode[]
-local function find_node_children(node, types)
+function M.find_node_children(node, types)
 	---@type TSNode[]
 	local children = {}
 	for child in node:iter_children() do
@@ -85,10 +85,10 @@ function M._get_function_parameters(function_node)
 	end
 
 	---@type TSNode[]
-	local identifiers = find_node_children(formal_parameters, { "identifier" })
+	local identifiers = M._find_node_children(formal_parameters, { "identifier" })
 	local rest_pattern = M._find_node_child(formal_parameters, "rest_pattern")
 	if rest_pattern ~= nil then
-		local rest_pattern_identifiers = find_node_children(rest_pattern, { "identifier" })
+		local rest_pattern_identifiers = M._find_node_children(rest_pattern, { "identifier" })
 		for _, identifier in ipairs(rest_pattern_identifiers) do
 			table.insert(identifiers, identifier)
 		end
